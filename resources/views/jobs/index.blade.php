@@ -1,20 +1,10 @@
-@extends('layout')
-
-@section('title')
-List of Jobs
-@endsection
-
-@section('content')
-    <h1>{{$title}}</h1>
-    @if(!empty($jobs))
+<x-layout>
+    <h1>Available Jobs</h1>
     <ul>
-        @foreach ($jobs as $job)
-        <li>
-            {{$job}}
-        </li>
-        @endforeach
+        @forelse($jobs as $job)
+        <li>{{$job}}</li>
+        @empty
+        <li>No job available</li>
+        @endforelse
     </ul>
-    @else
-    <p>No jobs available</p>
-    @endif
-@endsection
+</x-layout>
