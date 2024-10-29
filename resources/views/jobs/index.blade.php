@@ -8,12 +8,18 @@
 </head>
 
 <body>
-    <h1><?php echo $title; ?></h1>
+    <h1>{{$title}}</h1>
+    @if(!empty($jobs))
     <ul>
-        <?php foreach ($jobs as $job) : ?>
-            <li><?php echo htmlspecialchars($job, ENT_QUOTES,  'UTF-8'); ?></li>
-        <?php endforeach; ?>
+        @foreach ($jobs as $job)
+        <li>
+            {{$job}}
+        </li>
+        @endforeach
     </ul>
+    @else
+    <p>No jobs available</p>
+    @endif
 </body>
 
 </html>

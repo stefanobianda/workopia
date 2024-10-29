@@ -11,7 +11,7 @@ Route::get('/jobs', function () {
     $jobs = [
         'Web Developer',
         'Database Admin',
-        'Software <script> Engineer',
+        'Software Engineer',
         'System Analyst'
     ];
     return view('jobs.index', compact('title', 'jobs'));
