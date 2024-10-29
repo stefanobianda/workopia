@@ -1,3 +1,7 @@
 <div>
-    <!-- Walk as if you are kissing the Earth with your feet. - Thich Nhat Hanh -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/jobs/create">Create Job</a>
+    </nav>
 </div>
