@@ -29,10 +29,10 @@ return new class extends Migration
             $table->string('zipcode')->nullable();
             $table->string('contact_email');
             $table->string('contact_phone')->nullable();
-            $table->string('contact_name');
-            $table->string('contact_description')->nullable();
-            $table->string('contact_logo')->nullable();
-            $table->string('contact_website')->nullable();
+            $table->string('company_name');
+            $table->string('company_description')->nullable();
+            $table->string('company_logo')->nullable();
+            $table->string('company_website')->nullable();
 
             // Add user foraign key constrain
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -48,7 +48,7 @@ return new class extends Migration
             $table->dropForeign(['user_id']);
             $table->dropColumn(('user_id'));
 
-            $table->dropColumn(['salary', 'tags', 'job_type', 'remote', 'requirements', 'benefits', 'address', 'city', 'state', 'zipcode', 'contact_email', 'contact_phone', 'contact_name', 'contact_description', 'contact_logo', 'contact_website']);
+            $table->dropColumn(['salary', 'tags', 'job_type', 'remote', 'requirements', 'benefits', 'address', 'city', 'state', 'zipcode', 'contact_email', 'contact_phone', 'company_name', 'company_description', 'company_logo', 'company_website']);
         });
     }
 };

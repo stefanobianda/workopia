@@ -33,10 +33,10 @@ class JobFactory extends Factory
             'zipcode' => $this->faker->postcode(),
             'contact_email' => $this->faker->safeEmail(),
             'contact_phone' => $this->faker->phoneNumber(),
-            'contact_name' => $this->faker->company(),
-            'contact_description' => substr($this->faker->sentences(2, true), 0, 255),
-            'contact_logo' => $this->faker->imageUrl(100, 100, 'business', true, 'logo'),
-            'contact_website' => $this->faker->url(),
+            'company_name' => $this->faker->company(),
+            'company_description' => substr($this->faker->sentences(2, true), 0, 255),
+            'company_logo' => $this->faker->imageUrl(100, 100, 'business', true, 'logo'),
+            'company_website' => $this->faker->url(),
         ];
     }
 }

@@ -27,10 +27,10 @@ class Job extends Model
         'zipcode',
         'contact_email',
         'contact_phone',
-        'contact_name',
-        'contact_description',
-        'contact_logo',
-        'contact_website',
+        'company_name',
+        'company_description',
+        'company_logo',
+        'company_website',
         'user_id'
     ];
 
