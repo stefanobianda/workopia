@@ -1,14 +1,12 @@
 <x-layout>
-    <h1>Available Jobs</h1>
-    <ul>
+    <h1 class="text-2xl">All Jobs</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap4 mb-6">
         @forelse($jobs as $job)
-        <li>
-            <a href="{{route('jobs.show', $job->id)}}">
-                {{$job->title}} - {{$job->description}}
-            </a>
-        </li>
+        <x-job-card :job="$job" />
         @empty
         <li>No job available</li>
         @endforelse
-    </ul>
+
+    </div>
 </x-layout>
