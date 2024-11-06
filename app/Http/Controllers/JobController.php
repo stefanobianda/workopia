@@ -89,7 +89,7 @@ class JobController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Job $job): string
+    public function update(Request $request, Job $job): RedirectResponse
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255|min:5',
@@ -124,14 +124,21 @@ class JobController extends Controller
 
         $job->update($validatedData);
 
-        return redirect()->route('jobs.index')->with('success', 'Job listing updated successfully!');
+        return redirect()->route('jobs.show', $job)->with('success', 'Job listing updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): string
+    public function destroy(Job $job): RedirectResponse
     {
-        return "Destroy";
+        if ($job->company_logo) {
+            // Delete old logo
+            Storage::delete('public/logos/' . basename($job->company_logo));
+        }
+
+        $job->delete();
+
+        return redirect()->route('jobs.index')->with('success', 'Job listing deleted successfully!');
     }
 }
