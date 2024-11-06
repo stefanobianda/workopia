@@ -56,6 +56,14 @@ class JobController extends Controller
         // Hardcoded user ID, will be updated later with auth implemented!
         $validatedData['user_id'] = 1;
 
+        // Check for image
+        if ($request->hasFile('company_logo')) {
+            // Store the file
+            $path = $request->file('company_logo')->store('logos', 'public');
+            // Add path to validated data
+            $validatedData['company_logo'] = $path;
+        }
+
         Job::create($validatedData);
 
         return redirect()->route('jobs.index')->with('success', 'Job listing created successfully!');

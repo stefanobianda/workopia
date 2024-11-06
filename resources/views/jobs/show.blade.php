@@ -59,7 +59,7 @@
         <aside class="bg-white rounded-lg shadow-md p-3">
             <h3 class="text-xl text-center mb-4 font-bold">{{$job->company_name}}</h3>
             <img
-                src="/images/{{$job->company_logo}}"
+                src="/storage/{{$job->company_logo}}"
                 alt="Ad"
                 class="w-full rounded-lg mb-4 m-auto"
             />
