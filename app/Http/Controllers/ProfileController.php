@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -19,9 +20,30 @@ class ProfileController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email',
+            'avatar' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048'
         ]);
 
-        $user->update($validatedData);
+        // Get user name and email
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        // Handle avatar upload
+        if($request->hasFile('avatar')) {
+            // Delete old avatar if exists
+            if ($user->avatar) {
+                if (Storage::disk('public')->exists($user->avatar)) {
+                    Storage::disk('public')->delete($user->avatar);
+                    //Storage::delete('public/' . $user->avatar);
+                }
+            }
+
+            // Store new avatar
+            $avatarPath = $request->file('avatar')->store('avatar','public');
+            $user->avatar = $avatarPath;
+        }
+
+        // Update user info
+        $user->save();
 
         return redirect()->route('dashboard')->with('success', 'Profile info updated!');
     }
