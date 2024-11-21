@@ -6,6 +6,7 @@ use App\Models\Applicant;
 use App\Models\Job;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicantController extends Controller
 {
@@ -35,5 +36,23 @@ class ApplicantController extends Controller
         $application->save();
 
         return redirect()->back()->with('success','Your application has been submitted');
+    }
+
+    // @desc Delete job applicant
+    // route DELETE /applicants/{applicant}
+    public function destroy($id): RedirectResponse
+    {
+        $applicant = Applicant::findOrFail($id);
+
+        // Delete resume
+        if ($applicant->resume_path) {
+            if (Storage::disk('public')->exists($applicant->resume_path)) {
+                Storage::disk('public')->delete($applicant->resume_path);
+            }
+        }
+
+        $applicant->delete();
+
+        return redirect()->route('dashboard')->with('success','Applicant deleted successfully');
     }
 }
