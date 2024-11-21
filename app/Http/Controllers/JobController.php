@@ -150,4 +150,9 @@ class JobController extends Controller
         }
         return redirect()->route('jobs.index')->with('success', 'Job listing deleted successfully!');
     }
+
+    public function search(): RedirectResponse {
+        return redirect()->route('home');
+    }
+
 }
